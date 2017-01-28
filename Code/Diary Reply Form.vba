@@ -165,6 +165,9 @@ If DataErr = 3146 Then
     Response = 2
 End If
 End Sub
+Private Sub Form_Load()
+    Me![txtReplyTo].DefaultValue = Me.OpenArgs
+End Sub
 Private Sub Form_Open(Cancel As Integer)
 On Error GoTo err_frm
     DoCmd.RunCommand acCmdRecordsGoToNew

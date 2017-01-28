@@ -4,30 +4,16 @@ Sub EnableLists(Action)
 On Error GoTo err_EnableLists
     If Action = "disable" Then
         Me![lblMsg].Visible = True
-        Me![Diary_Units subform].Enabled = False
-        Me![Diary_Features subform].Enabled = False
-        Me![Diary_Spaces subform].Enabled = False
-        Me![Diary_Buildings subform].Enabled = False
-        Me![Diary_Tags_Subform].Enabled = False
-        Me![Diary_Tags_Pulldown_subform1].Enabled = False
-        Me![Diary_Tags_Pulldown_subform2].Enabled = False
-        Me![Diary_Tags_Pulldown_subform3].Enabled = False
-        Me![Diary_Tags_Pulldown_subform4].Enabled = False
-        Me![Diary_Tags_Pulldown_subform5].Enabled = False
-        Me![Diary_Tags_Pulldown_subform6].Enabled = False
+        Me![DailySketch_Units_subform].Enabled = False
+        Me![DailySketch_Features_subform].Enabled = False
+        Me![DailySketch_Spaces_subform].Enabled = False
+        Me![DailySketch_Buildings_subform].Enabled = False
     Else
         Me![lblMsg].Visible = False
-        Me![Diary_Units subform].Enabled = True
-        Me![Diary_Features subform].Enabled = True
-        Me![Diary_Spaces subform].Enabled = True
-        Me![Diary_Buildings subform].Enabled = True
-        Me![Diary_Tags_Subform].Enabled = True
-        Me![Diary_Tags_Pulldown_subform1].Enabled = True
-        Me![Diary_Tags_Pulldown_subform2].Enabled = True
-        Me![Diary_Tags_Pulldown_subform3].Enabled = True
-        Me![Diary_Tags_Pulldown_subform4].Enabled = True
-        Me![Diary_Tags_Pulldown_subform5].Enabled = True
-        Me![Diary_Tags_Pulldown_subform6].Enabled = True
+        Me![DailySketch_Units_subform].Enabled = True
+        Me![DailySketch_Features_subform].Enabled = True
+        Me![DailySketch_Spaces_subform].Enabled = True
+        Me![DailySketch_Buildings_subform].Enabled = True
     End If
 Exit Sub
 err_EnableLists:
@@ -100,17 +86,9 @@ Err_Close_Form_Click:
 End Sub
 Private Sub cmdOpenSketch_Click()
 On Error GoTo err_opensketch
-    DoCmd.OpenForm "frm_pop_graphic", acNormal, , , acFormReadOnly, , Me![txtSketch_Name]
+    DoCmd.OpenForm "frm_pop_dailysketch", acNormal, , , acFormReadOnly, , Me![txtSketch_Name]
 Exit Sub
 err_opensketch:
-    Call General_Error_Trap
-    Exit Sub
-End Sub
-Private Sub Diary_AfterUpdate()
-On Error GoTo err_diary
-    EnableLists "enable"
-Exit Sub
-err_diary:
     Call General_Error_Trap
     Exit Sub
 End Sub

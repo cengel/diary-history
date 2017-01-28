@@ -4,30 +4,16 @@ Sub EnableLists(Action)
 On Error GoTo err_EnableLists
     If Action = "disable" Then
         Me![lblMsg].Visible = True
-        Me![Diary_Units subform].Enabled = False
-        Me![Diary_Features subform].Enabled = False
-        Me![Diary_Spaces subform].Enabled = False
-        Me![Diary_Buildings subform].Enabled = False
-        Me![Diary_Tags_Subform].Enabled = False
-        Me![Diary_Tags_Pulldown_subform1].Enabled = False
-        Me![Diary_Tags_Pulldown_subform2].Enabled = False
-        Me![Diary_Tags_Pulldown_subform3].Enabled = False
-        Me![Diary_Tags_Pulldown_subform4].Enabled = False
-        Me![Diary_Tags_Pulldown_subform5].Enabled = False
-        Me![Diary_Tags_Pulldown_subform6].Enabled = False
+        Me![DailySketch_Units_subform].Enabled = False
+        Me![DailySketch_Features_subform].Enabled = False
+        Me![DailySketch_Spaces_subform].Enabled = False
+        Me![DailySketch_Buildings_subform].Enabled = False
     Else
         Me![lblMsg].Visible = False
-        Me![Diary_Units subform].Enabled = True
-        Me![Diary_Features subform].Enabled = True
-        Me![Diary_Spaces subform].Enabled = True
-        Me![Diary_Buildings subform].Enabled = True
-        Me![Diary_Tags_Subform].Enabled = True
-        Me![Diary_Tags_Pulldown_subform1].Enabled = True
-        Me![Diary_Tags_Pulldown_subform2].Enabled = True
-        Me![Diary_Tags_Pulldown_subform3].Enabled = True
-        Me![Diary_Tags_Pulldown_subform4].Enabled = True
-        Me![Diary_Tags_Pulldown_subform5].Enabled = True
-        Me![Diary_Tags_Pulldown_subform6].Enabled = True
+        Me![DailySketch_Units_subform].Enabled = True
+        Me![DailySketch_Features_subform].Enabled = True
+        Me![DailySketch_Spaces_subform].Enabled = True
+        Me![DailySketch_Buildings_subform].Enabled = True
     End If
 Exit Sub
 err_EnableLists:
@@ -114,6 +100,14 @@ err_diary:
     Call General_Error_Trap
     Exit Sub
 End Sub
+Private Sub cmdOpenDailySketch_Click()
+On Error GoTo err_cmdOpenDailySketch
+    DoCmd.OpenForm "frm_pop_dailysketch", acNormal, , , acFormReadOnly, , Me![txtDailySketch_Name]
+Exit Sub
+err_cmdOpenDailySketch:
+    Call General_Error_Trap
+    Exit Sub
+End Sub
 Private Sub Field20_AfterUpdate()
 On Error GoTo err_field20
     EnableLists "enable"
@@ -149,10 +143,10 @@ If IsNull(Me![ID]) Then
 Else
     EnableLists "enable"
 End If
-If Me![txtSketch_Name] <> "" Then
-    Me![cmdOpenSketch].Enabled = True
+If Me![txtDailySketch_Name] <> "" Then
+    Me![cmdOpenDailySketch].Enabled = True
 Else
-    Me![cmdOpenSketch].Enabled = False
+    Me![cmdOpenDailySketch].Enabled = False
 End If
 Exit Sub
 err_Current:
@@ -222,12 +216,20 @@ Err_cmdSave_Click:
     MsgBox Err.Description
     Resume Exit_cmdSave_Click
 End Sub
-Private Sub txtSketch_Name_AfterUpdate()
+Private Sub Text65_AfterUpdate()
+On Error GoTo err_diary
+    EnableLists "enable"
+Exit Sub
+err_diary:
+    Call General_Error_Trap
+    Exit Sub
+End Sub
+Private Sub txtDailySketch_Name_AfterUpdate()
 On Error GoTo err_Name
-If Me![txtSketch_Name] <> "" Then
-    Me![cmdOpenSketch].Enabled = True
+If Me![txtDailySketch_Name] <> "" Then
+    Me![cmdOpenDailySketch].Enabled = True
 Else
-    Me![cmdOpenSketch].Enabled = False
+    Me![cmdOpenDailySketch].Enabled = False
 End If
 Exit Sub
 err_Name:
