@@ -1,6 +1,6 @@
 # diary-history
 
-In this repo we track the historical changes of the Catalhoyuk Excavation database front end.
+In this repo we track the historical changes of the Catalhoyuk Diary database front end.
 
 `.vba` files were extracted as text from the MS Acess Database `.mdb`
 
